@@ -8,7 +8,7 @@ import openai
 config = dotenv.dotenv_values(".env")
 openai.api_key = config['OPENAI_API_KEY']
 
-documents = SimpleDirectoryReader(input_files=["./data"]).load_data()
+documents = SimpleDirectoryReader(input_files=["./data/catalog.txt"]).load_data()
 index = GPTVectorStoreIndex.from_documents(documents) # create the index 
 
 query_engine = index.as_query_engine()

@@ -6,8 +6,7 @@ from hugchat.login import Login
 from langchain.llms.base import LLM
 from typing import Optional, List, Mapping, Any
 from time import sleep
-import dotenv 
-config = dotenv.dotenv_values(".env")
+
 
 
 class HuggingChat(LLM):
@@ -38,7 +37,7 @@ class HuggingChat(LLM):
                     cookies = sign.login()
 
                     # Save cookies to usercookies/<email>.json
-                    sign.saveCookiesToDir()
+                    sign.saveCookies()
 
                     # Create a ChatBot
                     self.chatbot = hugchat.ChatBot(cookies=cookies.get_dict()) 
