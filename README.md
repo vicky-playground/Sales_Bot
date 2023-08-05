@@ -6,3 +6,8 @@ python3.11 -m pip install gradio
 python3.11 -m pip install hugchat
 python3.11 -m pip install sentence_transformers
 ```
+
+
+```
+echo "export OPENAI_API_KEY='yourkey'" >> ~/.zshrc
+```
