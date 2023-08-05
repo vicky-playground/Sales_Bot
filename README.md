@@ -6,7 +6,7 @@ python3.11 -m pip install gradio
 python3.11 -m pip install hugchat
 python3.11 -m pip install sentence_transformers
 ```
-
+# Use Environment Variables in place of your API key
 Set your ‘OPENAI_API_KEY’ Environment Variable using bash. Run the following command in your terminal, replacing yourkey with your API key. 
 ```
 echo "export OPENAI_API_KEY='yourkey'" >> ~/.bash_profile
