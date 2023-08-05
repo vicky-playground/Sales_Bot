@@ -14,7 +14,9 @@ echo "export OPENAI_API_KEY='yourkey'" >> ~/.bash_profile
 
 You’re all set! You can now reference the key in curl or load it in your Python:
 
+```
 import os
 import openai
  
 openai.api_key = os.environ["OPENAI_API_KEY"]
+```
