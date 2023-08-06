@@ -10,8 +10,8 @@ import gradio as gr
 import openai
 from langchain.agents import initialize_agent
 
-config = dotenv.dotenv_values(".env")
-openai.api_key = config['OPENAI_API_KEY']
+# Set up OpenAI API key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 #HUGGINGFACEHUB_API_TOKEN = config['HUGGINGFACEHUB_API_TOKEN']
 
