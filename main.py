@@ -1,21 +1,14 @@
 import os
-from langchain.schema import messages_from_dict, messages_to_dict, AIMessage
-from langchain.memory import ConversationBufferMemory, ChatMessageHistory
-from langchain import ConversationChain, LLMChain
-from langchain.docstore.document import Document
-from langchain.chains.summarize import load_summarize_chain
-from langchain.prompts import PromptTemplate
-from llama_index import LLMPredictor, PromptHelper, SimpleDirectoryReader, StorageContext, load_index_from_storage
+from langchain import LLMChain
+from llama_index import StorageContext, load_index_from_storage
 import gradio as gr
 import openai
-from langchain.agents import initialize_agent
 
 # Set up OpenAI API key
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-#Storing the Conversation History in a List
+#Storing the conversation history in a List
 conversation_history = []
-
 
 PROMPT_QUESTION = """
 Your name is IBM Help Assistant. You work for IBM. You are dedicated to every client's success.
@@ -29,7 +22,7 @@ Now continue the conversation with the human. If you do not know the answer, say
 Human: {input}
 Assistant:"""
 
-def chatbot(input_text):
+def ask_bot(input_text):
     # rebuild storage context
     storage_context = StorageContext.from_defaults(persist_dir="./storage")
     # load index
@@ -48,12 +41,18 @@ def chatbot(input_text):
 
     return output.response
 
-iface = gr.Interface(fn=chatbot,
-                      inputs=gr.inputs.Textbox(lines=7, label="Enter your text"),
-                      outputs="text",
-                      title="IBM Help Bot")
+with gr.Blocks() as demo:
+    gr.Markdown('# IBM Help Assistant')
+    gr.Markdown('## Your assistant to guide you to the right product.')
+    gr.Markdown('### Sample messages:')
+    gr.Markdown('#### :) I want to deploy an app for free')
+    gr.Markdown('#### :) any advice on analytics?')
+    gr.Markdown('#### :) what products do you have?')
+    gr.Markdown('#### :) I want to contact a real person')
+    gr.Markdown('#### many more......')
 
-iface.launch(share=True)
+    inputs=gr.inputs.Textbox(lines=4, label="Input Box", placeholder="Enter your text here")
+    submit_btn = gr.Button("Submit") 
+    submit_btn.click(fn=ask_bot, outputs=gr.Textbox(lines=4, label="Output Box") )
 
-
-
+demo.launch()
