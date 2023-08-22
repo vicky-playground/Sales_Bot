@@ -1,0 +1,6 @@
+llama-index 
+openai 
+gradio 
+nltk 
+llama-cpp-python 
+sentence_transformers
